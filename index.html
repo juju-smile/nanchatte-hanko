@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ja"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>なんちゃってハンコ</title><link rel="stylesheet" href="style.css"><body class="homeView">
+<div id="homeScreen" class="homeScreen"><div class="homeShell">
+  <div class="homeIntro">
+    <div class="homeTitle"><p class="homeEyebrow">文字やイラストを選ぶだけ！</p><div class="homeBrandRow"><img class="woodStamp" src="home-assets/wood-stamp.png" alt="" aria-hidden="true"><h1>なんちゃって<br>ハンコ</h1></div><p class="homeCatch">気持ちをポン！</p><p class="homeLead">かわいいハンコ・アイコン・ロゴが<br>簡単に作れます。</p></div>
+    <div class="homeActions"><button type="button" id="startRubber">消しゴム風ハンコを作る <span aria-hidden="true">›</span></button><button type="button" id="startPicture">イラストハンコを作る <span aria-hidden="true">›</span></button></div>
+    <button type="button" id="helpButton" class="helpButton">？ 使い方</button>
+  </div>
+  <div class="homeStamps" aria-label="アプリで作った6種類の見本">
+    <img class="homeStamp rubberRed" src="home-assets/rubber-red.png" alt="赤い消しゴム風ハンコ「愛」">
+    <img class="homeStamp rubberGreen" src="home-assets/rubber-green.png" alt="緑の消しゴム風ハンコ「心から感謝しています！」">
+    <img class="homeStamp squareStamp" src="home-assets/square-stamp.png" alt="プレゼント入りの四角いハンコ">
+    <img class="homeStamp squareIcon" src="home-assets/square-icon.png" alt="パソコンの四角いアイコン">
+    <img class="homeStamp roundIcon" src="home-assets/round-icon.png" alt="イラスト入りの丸いアイコン">
+    <img class="homeStamp roundStamp" src="home-assets/round-stamp.png" alt="ケーキ入りの丸いハンコ">
+  </div>
+</div></div>
+<div id="editorScreen" hidden>
+<header><span class="brand">ぽん、と気持ちを。</span><h1>なんちゃってハンコ<span>✿</span></h1><p>文字とイラストで、あなただけの小さなハンコ。</p></header>
+<main><section class="editor"><h2><b>1</b> ハンコの種類を選ぶ</h2><div class="tabs"><button id="rubberTab" aria-pressed="true">▣ 消しゴム風（文字のみ）</button><button id="pictureTab" aria-pressed="false">✿ イラスト入り</button></div>
+<h2 id="adjustTitle"><b>2</b> 好きなハンコに整える</h2><div id="rubberControls"><details class="settingGroup" id="rubberTextSection" open><summary>文字と向きを選ぶ</summary><p class="settingIntro">文字を入力し、縦書き・横書きを選べます。24文字まで。</p><div class="rubberFields"><label>ハンコの文字<textarea id="stampText" rows="2" maxlength="24" placeholder="例：ありがとう"></textarea></label><label>文字の向き<select id="direction"><option value="vertical">縦書き</option><option value="horizontal">横書き</option></select></label></div></details><div class="typeAdjust"><label>文字の大きさ <output id="rubberSizeValue">100</output><input id="rubberSize" type="range" min="50" max="160" value="100"></label><label>四角い枠の大きさ <output id="rubberFrameValue">100</output><input id="rubberFrame" type="range" min="30" max="100" value="100"></label><p class="hint">文字の太さは、文字数と枠の大きさに合わせて自動で整えます。</p><p class="rakkanNote">1文字なら、名前の一文字を使った印鑑風のハンコも作れます</p></div></div>
+<div id="pictureControls" hidden>
+  <p class="foldHint">＋を押すと設定が開きます。</p>
+  <details class="settingGroup" data-setting-section="finish">
+    <summary>① ハンコの形を選ぶ</summary>
+    <div class="finishChoices" role="group" aria-label="ハンコの形">
+      <button type="button" data-finish="roundStamp" aria-pressed="true"><span>丸いハンコ</span><small>丸い枠・背景透明</small></button>
+      <button type="button" data-finish="squareStamp" aria-pressed="false"><span>四角いハンコ</span><small>四角い枠・背景透明</small></button>
+      <button type="button" data-finish="roundIcon" aria-pressed="false"><span>丸いアイコン</span><small>枠なし・丸い背景</small></button>
+      <button type="button" data-finish="squareIcon" aria-pressed="false"><span>四角いアイコン</span><small>枠なし・四角い背景</small></button>
+      <button type="button" data-finish="logo" aria-pressed="false"><span>シンプルなロゴ</span><small>枠なし・背景透明</small></button>
+    </div>
+    <div id="backgroundChoices" hidden>
+      <h3 class="backgroundHeading">アイコンの背景色</h3>
+      <div class="backgroundColors" role="group" aria-label="アイコンの背景色">
+        <button type="button" data-background="white" aria-pressed="true">白</button>
+        <button type="button" data-background="cream" aria-pressed="false">クリーム</button>
+        <button type="button" data-background="pink" aria-pressed="false">薄いピンク</button>
+        <button type="button" data-background="mint" aria-pressed="false">薄い緑</button>
+        <button type="button" data-background="blue" aria-pressed="false">薄い水色</button>
+      </div>
+    </div>
+  </details>
+  <details class="settingGroup" data-setting-section="illustration" open>
+    <summary>② イラストを選ぶ</summary>
+    <div id="gallery" class="gallery"></div>
+    <h3 class="uploadHeading">自分のイラストを選ぶ</h3>
+    <p class="ownHint">保存してある画像から選べます。背景が透明な画像がおすすめです。</p>
+    <label class="upload">＋ 画像を開く<input id="upload" type="file" accept="image/png,image/jpeg,image/webp"></label>
+    <p class="hint">画像はこの端末内だけで使います。</p>
+  </details>
+  <details class="settingGroup" data-setting-section="text">
+    <summary>③ 文字を入れる <small>（省略できます）</small></summary>
+    <p class="settingIntro">文字を丸く並べるか、まっすぐ並べるかを選べます。</p>
+    <div class="textrow"><label>上の文字<input id="topText" placeholder="例：ありがとう" maxlength="24"></label><label>並べ方<select id="topMode"><option value="arc">円形</option><option value="line">直線</option></select></label></div>
+    <div class="textrow"><label>下の文字<input id="bottomText" placeholder="例：ほんのきもち" maxlength="24"></label><label>並べ方<select id="bottomMode"><option value="arc">円形</option><option value="line">直線</option></select></label></div>
+  </details>
+  <details class="settingGroup" data-setting-section="size">
+    <summary>④ 大きさを調整</summary>
+    <h3 class="adjustSubheading">上の文字</h3>
+    <div class="typeAdjust">
+      <label>文字の大きさ <output id="topSizeValue">28</output><input id="topSize" type="range" min="12" max="50" value="28"></label>
+      <label id="topArcLabel">円弧の広がり<input id="topArc" type="range" min="0" max="160" value="75"></label>
+      <p id="topArcHint" class="hint" role="status"></p>
+      <label>上下位置<input id="topY" type="range" min="-30" max="30" value="0"></label>
+    </div>
+    <h3 class="adjustSubheading">下の文字</h3>
+    <div class="typeAdjust">
+      <label>文字の大きさ <output id="bottomSizeValue">28</output><input id="bottomSize" type="range" min="12" max="50" value="28"></label>
+      <label id="bottomArcLabel">円弧の広がり<input id="bottomArc" type="range" min="0" max="160" value="90"></label>
+      <p id="bottomArcHint" class="hint" role="status"></p>
+      <label>上下位置<input id="bottomY" type="range" min="-30" max="30" value="0"></label>
+    </div>
+    <h3 id="adjustHeading" class="adjustHeading">枠とイラストの大きさ</h3>
+    <div class="typeAdjust">
+      <label id="frameSizeLabel"><span id="frameSizeTitle">枠の大きさ</span><input id="frameSize" type="range" min="78" max="100" value="100"></label>
+      <label>イラストの大きさ<input id="imageSize" type="range" min="30" max="145" value="78"></label>
+      <p id="imageSizeHint" class="hint" role="status"></p>
+    </div>
+  </details>
+</div><label>ハンコの色</label><div id="colors" class="colors"></div><button class="reset" id="reset">トップ画面に戻る</button></section>
+<aside><div class="previewCard"><div class="previewBlock"><div class="previewTitle">できあがりプレビュー <span>変更がすぐに反映されます</span></div><button type="button" id="previewExpand" class="checker" aria-label="プレビューを拡大する"><canvas id="preview" width="600" height="600" aria-label="作成中のハンコ"></canvas></button><p id="previewHint" class="hint">市松模様の部分は透明です</p></div><div class="saveBlock"><h2><b>3</b> ハンコを保存する</h2><p id="saveHint" class="hint">背景が透明なPNG画像として保存します（1000 × 1000ピクセル）。</p><button id="save" class="primary">画像を保存する</button><p id="saveLocationHint" class="hint">画像は通常、ダウンロードフォルダーに保存されます。ブラウザーの設定により、別の場所になることもあります。</p><p id="status" role="status" aria-live="polite"></p><p id="iphoneSaveGuide" hidden>次の画面で「画像を保存」を選んでください</p></div></div><p class="footnote">登録不要・画像の送信なし<br>あなたの端末の中で作れます。</p></aside></main><div id="keyboardPreview" hidden aria-label="入力中のハンコのプレビュー"><canvas id="keyboardPreviewCanvas" width="600" height="600"></canvas></div><dialog id="resetDialog" aria-labelledby="resetQuestion"><h2 id="resetQuestion">トップ画面に戻りますか？</h2><p>今の編集内容は初期状態に戻ります。</p><div class="dialogButtons"><button id="cancelReset">キャンセル</button><button id="confirmReset" class="primary">戻る</button></div></dialog><dialog id="previewZoomDialog" class="previewZoomDialog" aria-labelledby="previewZoomTitle"><h2 id="previewZoomTitle">できあがりを拡大</h2><div class="zoomChecker"><img id="previewZoomImage" alt="拡大したハンコのプレビュー"></div><button type="button" id="closePreviewZoom">編集に戻る</button></dialog><dialog id="iphoneSaveDialog" class="iphoneSaveDialog" aria-labelledby="iphoneSaveTitle"><h2 id="iphoneSaveTitle">iPhoneで画像を保存</h2><p id="iphoneSaveHelp">画像を長押しして「写真に保存」を選んでください。</p><div class="savedImageChecker"><img id="iphoneSavedImage" alt="完成したハンコのPNG画像。長押しして保存できます"></div><button type="button" id="shareImage" class="primary" hidden>共有メニューを開く</button><button type="button" id="closeIphoneSave" class="saveDialogClose">編集に戻る</button><p class="saveDialogNote">保存先を選んだあと、「写真」または「ファイル」で画像を確認してください。</p></dialog><footer>なんちゃってハンコ · つくる楽しさを、気軽に。</footer></div>
+<dialog id="helpDialog" class="helpDialog" aria-labelledby="helpTitle"><h2 id="helpTitle">かんたんな使い方</h2><ol><li>作りたいハンコのボタンを押します。</li><li>文字やイラストを選ぶと、できあがりがすぐに見られます。</li><li>「画像を保存する」で、PNG画像を端末に保存できます。</li></ol><p>自分のイラストも使えます。背景が透明な画像がおすすめです。画像や文字は外部へ送られません。</p><button type="button" id="closeHelp" class="primary">閉じる</button></dialog>
+<script src="app.js"></script></body></html>
